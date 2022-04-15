@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\PictureRepository;
-// use Gedmo\Mapping\Annotation as Gedmo;
-// @Gedmo\Timestampable(on="create")
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,8 +19,15 @@ class Picture
 
     /**
      * @ORM\Column(type="text")
+     * @ORM\OrderBy({"picture" = "DESC"})
      */
     private $picture;
+
+    /**
+     * @ORM\OrderBy({"createdAt" = "DESC"})
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $createdAt;
 
     
     public function getId(): ?int
@@ -41,6 +46,18 @@ class Picture
 
         $this->picture = $picture;
   
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
         return $this;
     }
 

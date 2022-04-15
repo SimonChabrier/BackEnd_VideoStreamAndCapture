@@ -45,6 +45,12 @@ class PictureRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findAllPictureOrderByDesc()
+    {
+        return $this->findBy(array(), array('createdAt' => 'DESC'));
+    }
+
     // /**
     //  * @return Picture[] Returns an array of Picture objects
     //  */

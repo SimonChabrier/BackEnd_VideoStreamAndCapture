@@ -52,15 +52,15 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("/pictures", name="app_pictures", methods={"GET"})
+     * @Route("/getpictures", name="app_pictures", methods={"GET"})
      */
     public function sendAllPicturesFromDataBase(PictureRepository $pictureRepository): Response
     {
         // on renvoit une réponse de type JsonResponse
         // le contentType Json dans les headers est ajouté automatiquement par $this->json
-
+        // dans le picture repository j'ai fait une méthode qui retourne les images par ordre DESC
         return $this->json(
-            $picture = $pictureRepository->findAll(),
+            $pictureRepository->findAllPictureOrderByDesc(),
         // status code http
             200,
         // HTTP headers dans mon cas il n'y en a pas de spécifique à envoyer
