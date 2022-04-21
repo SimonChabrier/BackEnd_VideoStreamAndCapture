@@ -4,11 +4,8 @@ namespace App\Entity;
 
 use App\Repository\PictureRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @Vich\Uploadable
  * @ORM\Entity(repositoryClass=PictureRepository::class)
  */
 class Picture
@@ -25,16 +22,6 @@ class Picture
      * @ORM\OrderBy({"picture" = "DESC"})
      */
     private $picture;
-
-    /**
-     * Ici on passe eventPictureFile qui correspond à la propriété
-     * user_picture en Bdd pour faire le lien
-     * entre le fichier téléchargé soit la valeur de $eventPictureFile
-     * 
-     * @Vich\UploadableField(mapping="user_picture", fileNameProperty="picture")
-     * @var File
-     */
-    private $pictureFile;
 
     /**
      * @ORM\OrderBy({"createdAt" = "DESC"})
@@ -70,32 +57,6 @@ class Picture
         $this->picture = $picture;
   
         return $this;
-    }
-
-    /**
-     * Set the value of PictureFile
-     * @param  File  $pictureFile
-     * @return  self
-     */ 
-    public function setPictureFile(File $pictureFile = null)
-    {
-        $this->picture = $pictureFile;
-
-        if ($pictureFile) {
-
-            //todo faire mon persist ici ?
-
-           // $this->updatedAt = new \DateTime('now');
-        }
-    }
-
-    /**
-     * Get the value of PictureFile
-     * @return  File
-     */ 
-    public function getPictureFile()
-    {
-        return $this->pictureFile;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable

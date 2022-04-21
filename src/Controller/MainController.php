@@ -14,11 +14,13 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="app_main")
      */
-    public function index(PictureRepository $pictureRepository,
+    public function index(
+    PictureRepository $pictureRepository,
     EntityManagerInterface $doctrine): Response
     {
-
-        $imgs = $pictureRepository->findPictureAndIdObjets();
+            // je récupère tous mes objets
+            $imgs = $pictureRepository->findPictureAndIdObjets();
+            //je boucle dessus et converti les images. 
             foreach($imgs as $obj)
             {  
                 $id = $obj->getId();
