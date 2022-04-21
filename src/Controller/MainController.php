@@ -26,7 +26,7 @@ class MainController extends AbstractController
                 $pictureFile = $obj->getPictureFile();
 
                 if($pictureFile) {
-                    break;
+              
                 } else {
                     $id = $obj->getId();
                     $img = $obj->getPicture();
