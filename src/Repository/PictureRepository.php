@@ -51,6 +51,20 @@ class PictureRepository extends ServiceEntityRepository
         return $this->findBy(array(), array('createdAt' => 'DESC'));
     }
 
+
+    public function findPictureAndIdObjets()
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Picture p
+            ORDER BY p.id ASC'
+        );
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
     // /**
     //  * @return Picture[] Returns an array of Picture objects
     //  */
