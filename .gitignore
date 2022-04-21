@@ -7,4 +7,6 @@
 /var/
 /vendor/
 /public/
+*.DS_Store
+publi/assets*
 ###< symfony/framework-bundle ###
