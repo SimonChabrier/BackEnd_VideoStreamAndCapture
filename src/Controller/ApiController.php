@@ -71,7 +71,7 @@ class ApiController extends AbstractController
         // HTTP headers dans mon cas il n'y en a pas de spécifique à envoyer
             [],
         // Contexte de serialisation, les groups de propriété que l'on veux serialiser si on a fait des groupes
-        // ['groups'=> 'groupe_x', 'groupe_y']
+            //['groups'=> 'groupe_x']
         );
     }
 

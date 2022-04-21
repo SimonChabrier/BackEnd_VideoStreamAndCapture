@@ -33,7 +33,7 @@ class MainController extends AbstractController
                 $file = "./assets/upload/pictures/" . $newFileName;
                 $success = file_put_contents($file, $data); 
                 
-                $img = $obj->setPicture($newFileName);
+                $img = $obj->setPictureFile($newFileName);
 
                 $doctrine->persist($img);
                 $doctrine->flush();

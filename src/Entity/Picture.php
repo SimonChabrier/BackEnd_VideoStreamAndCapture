@@ -39,6 +39,11 @@ class Picture
      */
     private $lng;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $pictureFile;
+
     
     public function getId(): ?int
     {
@@ -91,6 +96,18 @@ class Picture
     public function setLng(?string $lng): self
     {
         $this->lng = $lng;
+
+        return $this;
+    }
+
+    public function getPictureFile(): ?string
+    {
+        return $this->pictureFile;
+    }
+
+    public function setPictureFile(?string $pictureFile): self
+    {
+        $this->pictureFile = $pictureFile;
 
         return $this;
     }
