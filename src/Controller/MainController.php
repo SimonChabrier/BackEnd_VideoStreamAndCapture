@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\PictureConverter;
+use Error;
 
 class MainController extends AbstractController
 {
@@ -17,25 +18,18 @@ class MainController extends AbstractController
     public function index(PictureRepository $pictureRepository): Response
     {
 
-
         $imgs = $pictureRepository->findPictureAndIdObjets();
         
             foreach($imgs as $obj)
             {  
-
+                $id = $obj->getId();
                 $img = $obj->getPicture();
                 
                 $img = str_replace('data:image/jpeg;base64,', '', $img);
-           
                 $img = str_replace(' ', '+', $img);
-                
                 $data = base64_decode($img);
-                
                 $file = "./assets/upload/pictures/" . uniqid() . '.jpeg';
-               
-                $success = file_put_contents($file, $data);
-               
-      
+                $success = file_put_contents($file, $data);   
             }
 
         return $this->render('main/index.html.twig', [

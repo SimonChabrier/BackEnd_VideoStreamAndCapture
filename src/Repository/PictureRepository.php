@@ -51,7 +51,6 @@ class PictureRepository extends ServiceEntityRepository
         return $this->findBy(array(), array('createdAt' => 'DESC'));
     }
 
-
     public function findPictureAndIdObjets()
     {
         $entityManager = $this->getEntityManager();

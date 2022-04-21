@@ -27,6 +27,8 @@ class ApiController extends AbstractController
     {
         $data = $request->getContent();
         $picture = $serializer->deserialize($data, Picture::class, 'json');
+       
+        //todo il faudrait convertir l'image et la persister
         $errors = $validator->validate($picture);
 
         if (count($errors) > 0) {
@@ -36,6 +38,7 @@ class ApiController extends AbstractController
             return new JsonResponse($errorsString, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
+        
         $doctrine->persist($picture);
         $doctrine->flush();
 
