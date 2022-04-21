@@ -8,5 +8,6 @@
 /vendor/
 /public/
 *.DS_Store
-publi/assets*
+public/assets*
+assets/*
 ###< symfony/framework-bundle ###
