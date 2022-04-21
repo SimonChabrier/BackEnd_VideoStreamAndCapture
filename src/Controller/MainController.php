@@ -23,21 +23,26 @@ class MainController extends AbstractController
             //je boucle dessus et converti les images. 
             foreach($imgs as $obj)
             {  
-                $id = $obj->getId();
-                $img = $obj->getPicture();
-                
-                $img = str_replace('data:image/jpeg;base64,', '', $img);
-                $img = str_replace(' ', '+', $img);
-                $data = base64_decode($img);
-                $newFileName = uniqid() . '.jpeg';
-                $file = "./assets/upload/pictures/" . $newFileName;
-                $success = file_put_contents($file, $data); 
-                
-                $img = $obj->setPictureFile($newFileName);
+                $pictureFile = $obj->getPictureFile();
 
-                $doctrine->persist($img);
-                $doctrine->flush();
+                if($pictureFile) {
+                    break;
+                } else {
+                    $id = $obj->getId();
+                    $img = $obj->getPicture();
+                
+                    $img = str_replace('data:image/jpeg;base64,', '', $img);
+                    $img = str_replace(' ', '+', $img);
+                    $data = base64_decode($img);
+                    $newFileName = uniqid() . '.jpeg';
+                    $file = "./assets/upload/pictures/" . $newFileName;
+                    $success = file_put_contents($file, $data);
+                
+                    $img = $obj->setPictureFile($newFileName);
 
+                    $doctrine->persist($img);
+                    $doctrine->flush();
+                }
             }
 
         return $this->render('main/index.html.twig', [
