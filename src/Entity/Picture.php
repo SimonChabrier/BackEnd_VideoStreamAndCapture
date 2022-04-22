@@ -107,6 +107,9 @@ class Picture
         return $this->pictureFile;
     }
 
+    /**
+     * @ORM\PostPersist
+     */
     public function setPictureFile(?string $pictureFile): self
     {
         $this->pictureFile = $pictureFile;

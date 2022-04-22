@@ -16,33 +16,33 @@ class MainController extends AbstractController
      */
     public function index( PictureRepository $pictureRepository, EntityManagerInterface $doctrine): Response
     {
-            // je récupère tous mes objets
-            $imgs = $pictureRepository->findAll();
+            // // je récupère tous mes objets
+            // $imgs = $pictureRepository->findAll();
             
-            //je boucle dessus et converti les images. 
-            foreach($imgs as $obj)
-            {  
-                $pictureFile = $obj->getPictureFile();
+            // //je boucle dessus et converti les images. 
+            // foreach($imgs as $obj)
+            // {  
+            //     $pictureFile = $obj->getPictureFile();
               
-                if($pictureFile) {
+            //     if($pictureFile) {
               
-                } else {
-                    $id = $obj->getId();
-                    $img = $obj->getPicture();
+            //     } else {
+            //         $id = $obj->getId();
+            //         $img = $obj->getPicture();
                 
-                    $img = str_replace('data:image/jpeg;base64,', '', $img);
-                    $img = str_replace(' ', '+', $img);
-                    $data = base64_decode($img);
-                    $newFileName = uniqid() . '.jpeg';
-                    $file = "./assets/upload/pictures/" . $newFileName;
-                    $success = file_put_contents($file, $data);
+            //         $img = str_replace('data:image/jpeg;base64,', '', $img);
+            //         $img = str_replace(' ', '+', $img);
+            //         $data = base64_decode($img);
+            //         $newFileName = uniqid() . '.jpeg';
+            //         $file = "./assets/upload/pictures/" . $newFileName;
+            //         $success = file_put_contents($file, $data);
                 
-                    $img = $obj->setPictureFile($newFileName);
+            //         $img = $obj->setPictureFile($newFileName);
 
-                    $doctrine->persist($img);
-                    $doctrine->flush();
-                }
-            }
+            //         $doctrine->persist($img);
+            //         $doctrine->flush();
+            //     }
+            // }
 
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
