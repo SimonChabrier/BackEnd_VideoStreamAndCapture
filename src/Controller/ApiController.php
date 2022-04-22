@@ -39,11 +39,9 @@ class ApiController extends AbstractController
             return new JsonResponse($errorsString, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        
         $doctrine->persist($picture);
         
         $doctrine->flush();
-
 
         return $this->json(
             $picture,
