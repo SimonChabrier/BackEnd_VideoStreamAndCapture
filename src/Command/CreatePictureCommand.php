@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class CreatePictureCommand extends Command
 {
-    protected static $defaultName = 'generate:jpeg';
+    protected static $defaultName = 'generate:picture';
 
     private $pictureRepository;
     private $entityManagerInterface;

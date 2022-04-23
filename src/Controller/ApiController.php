@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Picture;
 use App\Repository\PictureRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,11 +23,11 @@ class ApiController extends AbstractController
         SerializerInterface $serializer,
         ValidatorInterface $validator
     ): Response
-    {
+    {   
+        
         $data = $request->getContent();
-        
         $picture = $serializer->deserialize($data, Picture::class, 'json');
-        
+
         //todo il faudrait convertir l'image et la persister
         $errors = $validator->validate($picture);
 

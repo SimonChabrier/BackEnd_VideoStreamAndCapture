@@ -5,20 +5,18 @@ namespace App\EventListener;
 use App\Entity\Picture;
 use App\Service\jpegConverterService;
 
-class PictureListener
+class PictureListener 
 {
-   
-
-    private $pictdata;
+    private $img;
 
     // ici a chaque mise à jour d'une Picture je vais demander de me créer le Fichier jpeg
     // en apellant mon service jpegConverterService
     // le paramètrage de ce listener est déclaré dans le fichier services.yaml
 
     // j'apelle le contructeur pour accèder au propriétés de jpegConverterService service
-    public function __construct(jpegConverterService $pictdata)
+    public function __construct(jpegConverterService $img)
     {
-        $this->pictdata = $pictdata; 
+        $this->img = $img; 
     }
 
     /**
@@ -27,8 +25,9 @@ class PictureListener
      * @param Picture $picture
      * @return void
      */
-    public function createFile(Picture $picture)
-    {
-        $picture->setPictureFile($this->picture->jpegConverter($picture->getPicture()));
+    public function updatePictureFile(Picture $picture)
+    {   
+        $pictureFile = $this->img->convertPictureService($picture->getPicture());
+        $picture->setPictureFile($pictureFile);
     }
 }

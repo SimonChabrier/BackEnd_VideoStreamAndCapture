@@ -2,20 +2,29 @@
 
 namespace App\Controller;
 use App\Entity\Picture;
+use App\Service\jpegConverterService;
 use App\Repository\PictureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use App\EventListener\PictureListener;
 
 class MainController extends AbstractController
 {
+
+
+    
+
     /**
      * @Route("/", name="app_main")
      */
     public function index( PictureRepository $pictureRepository, EntityManagerInterface $doctrine): Response
-    {
+    {       
+
+
+
+
             // // je récupère tous mes objets
             // $imgs = $pictureRepository->findAll();
             

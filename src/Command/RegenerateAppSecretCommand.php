@@ -3,15 +3,13 @@
 namespace App\Command;
 
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 class RegenerateAppSecretCommand extends Command
 {
-    protected static $defaultName = 'regenerate-app-secret';
+    protected static $defaultName = 'regenerate:secret';
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -23,12 +21,10 @@ class RegenerateAppSecretCommand extends Command
             $secret .= $a[rand(0, 15)];
         }
 
-        $r = shell_exec('sed -i -E "s/^APP_SECRET=.{32}$/APP_SECRET=' . $secret . '/" .env');
-
-        $io->success('New APP_SECRET was generated: ' . $secret);
+        $io->success('Nouvelle App Secret Key: ' . $secret);
 
         return 0;
     }
 }
 
-// bin/console regenerate-app-secret to generate a new app secret
+// bin/console regenerate:secret

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use App\Service\jpegConverterService;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PictureRepository;
