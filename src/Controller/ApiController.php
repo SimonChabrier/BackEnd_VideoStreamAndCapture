@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Picture;
 use App\Repository\PictureRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,17 +15,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ApiController extends AbstractController
 {
     /**
-     * @Route("/api", name="app_api", methods={"GET", "POST"})
+     * @Route("/api/post", name="app_api", methods={"POST"})
      */
-    public function getPicturesFromJsPost(
+    public function getPicturesFromFront(
         EntityManagerInterface $doctrine,
         Request $request,
         SerializerInterface $serializer,
         ValidatorInterface $validator
     ): Response
-    {
+    {   
+        
         $data = $request->getContent();
         $picture = $serializer->deserialize($data, Picture::class, 'json');
+
+        //todo il faudrait convertir l'image et la persister
         $errors = $validator->validate($picture);
 
         if (count($errors) > 0) {
@@ -37,8 +39,8 @@ class ApiController extends AbstractController
         }
 
         $doctrine->persist($picture);
+        
         $doctrine->flush();
-
 
         return $this->json(
             $picture,
@@ -52,21 +54,23 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("/getpictures", name="app_pictures", methods={"GET"})
+     * @Route("/api/get", name="app_pictures", methods={"GET"})
      */
-    public function sendAllPicturesFromDataBase(PictureRepository $pictureRepository): Response
+    public function sendAllPicturesToFront(PictureRepository $pictureRepository): Response
     {
         // on renvoit une réponse de type JsonResponse
         // le contentType Json dans les headers est ajouté automatiquement par $this->json
         // dans le picture repository j'ai fait une méthode qui retourne les images par ordre DESC
         return $this->json(
-            $pictureRepository->findAllPictureOrderByDesc(),
+        $pictureRepository->findAllPictureOrderByDesc(),
         // status code http
-            200,
-        // HTTP headers dans mon cas il n'y en a pas de spécifique à envoyer
-            [],
+        200,
+        //headers
+        [],
+        // Contexte
+        ['groups' => 'api_post'],
         // Contexte de serialisation, les groups de propriété que l'on veux serialiser si on a fait des groupes
-        // ['groups'=> 'groupe_x', 'groupe_y']
+        //['groups'=> 'groupe_x']
         );
     }
 

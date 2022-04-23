@@ -1,12 +1,17 @@
 <?php
 
 namespace App\Entity;
-
-use App\Repository\PictureRepository;
+use App\Service\jpegConverterService;
+use Symfony\Component\Serializer\Annotation\Groups as Groups;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PictureRepository;
+use Doctrine\ORM\EntityManagerInterface;
+// use Symfony\Component\Serializer\Annotation\Groups;
+// https://symfony.com/doc/current/serializer.html#using-serialization-groups-annotations
 
 /**
  * @ORM\Entity(repositoryClass=PictureRepository::class)
+ * 
  */
 class Picture
 {
@@ -31,13 +36,21 @@ class Picture
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"api_post"})
      */
     private $lat;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"api_post"})
      */
     private $lng;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"api_post"})
+     */
+    private $pictureFile;
 
     
     public function getId(): ?int
@@ -94,5 +107,22 @@ class Picture
 
         return $this;
     }
+
+    public function getPictureFile(): ?string
+    {
+        return $this->pictureFile;
+    }
+
+    /**
+     * @ORM\PostPersist
+     */
+    public function setPictureFile(?string $pictureFile): self
+    {
+        $this->pictureFile = $pictureFile;
+
+        return $this;
+    }
+
+
 
 }

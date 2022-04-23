@@ -1,0 +1,10 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        user_picture:
+            uri_prefix: '%user_picture%'
+            upload_destination: '%user_picture%'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
