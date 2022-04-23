@@ -13,7 +13,7 @@ class PictureListener
     // en apellant mon service jpegConverterService
     // le paramètrage de ce listener est déclaré dans le fichier services.yaml
 
-    // j'apelle le contructeur pour accèder au propriétés de jpegConverterService service
+    // j'apelle le contructeur pour accèder aux propriétés de jpegConverterService service
     public function __construct(jpegConverterService $img)
     {
         $this->img = $img; 
