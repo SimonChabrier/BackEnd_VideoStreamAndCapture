@@ -20,11 +20,11 @@ class jpegConverterService
         $img = str_replace('data:image/jpeg;base64,', '', $img);
         $img = str_replace(' ', '+', $img);
         $data = base64_decode($img);
-        $newFileName = uniqid() . '.jpeg';
-        $file =  $directoryPath . $newFileName;
+        $pictureFile = uniqid() . '.jpeg'; // ici j'ai mon image seule
+        $file =  $directoryPath . $pictureFile; //ici je la déplace
         $success = file_put_contents($file, $data);      
 
-        return $newFileName;
+        return $pictureFile;
     }
 }
 
