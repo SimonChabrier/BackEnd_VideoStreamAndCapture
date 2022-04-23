@@ -13,10 +13,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 //! PROBLEME SI ON UTILISE LE SERVICE LES IMAGES SONT CREES DEUX FOIS
 //* PARCE QUE ON A LE LISTENER SUR CE SERVICE QUI VOIT QU'ON PERSISTE DONC IL REPASSE DERRIERE
 //* ET REFAIT LES IMAGES UNE SECONDE FOIS !
+//* IL FAUT DONC COMMENTER LE LISTENER DANS SERVICE.YAML POUR UTOLILSER CETTE COMMANDE ACTUELLEMENT
+//* ET  CHANGER LE $directoryPath dans jpegConverterService.php
 
 class CreatePictureUsingService extends Command
 {
-    protected static $defaultName = 'generate:picture';
+    protected static $defaultName = 'generate:picture:service';
 
     private $pictureRepository;
     private $jpegConverterService;
