@@ -3,8 +3,9 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
-parameters:
-    user_picture: "assets/upload/pictures"
+
+# parameters:
+#     user_picture: "assets/upload/pictures"
     
 services:
     # default configuration for services in *this* file
@@ -36,11 +37,7 @@ services:
                 # methode de mon listener
                 method: updatePictureFile
             -
-                # le nom du type d'évènement, dans notre cas, un évènement doctrine entity listener
                 name: doctrine.orm.entity_listener
-                # le nom de l'event : avant creation
                 event: prePersist
-                # l'entity sur laquelle on veut être notifié
                 entity: App\Entity\Picture
-                # methode de mon listener
                 method: updatePictureFile    
