@@ -8,11 +8,11 @@ liip_imagine:
         
     webp:
         generate: true
-        quality: 80    
+        quality: 100    
 
     filter_sets:
         portrait: 
             filters: 
-                thumbnail: { size: [150, 300], mode: outbound } 
+                thumbnail: { size: [200, 300], mode: outbound } 
                 
 

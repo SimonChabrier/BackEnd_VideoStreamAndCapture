@@ -19,7 +19,9 @@ use Liip\ImagineBundle\Service\FilterService;
 
 class liipListener 
 {
-    private $filterService;
+    // private $filterService; 
+    //* Pas besoin de paramètre spécifique - le service est directement reconnu parce que apellé dans services.yaml suivant la doc liip
+    //* Donc on utilise l'injection de dépendance directement - comme pour les autres classes de symfony.
 
     public function __construct(FilterService $filterService)
     {
