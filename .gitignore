@@ -10,4 +10,6 @@
 *.DS_Store
 /public/assets/*
 assets/*
+**/assets/*
+**/assets/upload/
 ###< symfony/framework-bundle ###
