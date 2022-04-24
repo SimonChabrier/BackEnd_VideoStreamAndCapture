@@ -45,7 +45,7 @@ services:
                 method: updatePictureFile    
 
      # Mon listener sur Doctrine pour exploiter mon service jpegConcerterService depuis PictureListener
-    App\EventListener\LiipListener:
+    App\EventListener\liipListener:
         tags:
             -
                 # le nom du type d'évènement, dans notre cas, un évènement doctrine entity listener

@@ -5,8 +5,9 @@ namespace App\EventListener;
 use App\Entity\Picture;
 use Liip\ImagineBundle\Service\FilterService;
 
-
-class LiipListener 
+//todo ATTENTION CE LISTENER A ETE RENOMME ET CA A CREE UN CACHE QUELQUE PART IL EST REFERENCE AVEC UN l MINUSCULE 
+// todo IL FAUT LE GARDER PARTOUT AVEC CE NOM ICI ET DANS service.yaml EN liip SANS L MAJUSCULE ! 
+class liipListener 
 
 {
     private $filterService;
@@ -26,8 +27,6 @@ class LiipListener
         $pictureName = $picture->getPictureFile(); // je récupère le nom du fichier
         $path = '/assets/upload/pictures/'; //je défini le path local
         $this->filterService->getUrlOfFilteredImage($path.$pictureName, 'portrait');
-        
-        //$resourcePath = $this->filterService->getUrlOfFilteredImage($path.$pictureName, 'portrait');
-        //return $resourcePath;
+
     }
 }
