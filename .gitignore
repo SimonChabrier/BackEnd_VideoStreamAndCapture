@@ -12,6 +12,7 @@
 assets/*
 **/assets/*
 **/assets/upload/
+**/assets/upload/
 ###< symfony/framework-bundle ###
 
 ###> liip/imagine-bundle ###

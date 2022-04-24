@@ -5,9 +5,11 @@ namespace App\EventListener;
 use App\Entity\Picture;
 use App\Service\jpegConverterService;
 
+
 class PictureListener 
 {
     private $img;
+
 
     // ici a chaque mise à jour d'une Picture je vais demander de me créer le Fichier jpeg
     // en apellant mon service jpegConverterService
@@ -17,6 +19,7 @@ class PictureListener
     public function __construct(jpegConverterService $img)
     {
         $this->img = $img; 
+  
     }
 
     /**
@@ -29,5 +32,7 @@ class PictureListener
     {   
         $pictureFile = $this->img->convertPictureService($picture->getPicture());
         $picture->setPictureFile($pictureFile);
+
+        
     }
 }
