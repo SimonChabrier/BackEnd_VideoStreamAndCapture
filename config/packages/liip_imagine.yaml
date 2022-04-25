@@ -13,6 +13,6 @@ liip_imagine:
     filter_sets:
         portrait: 
             filters: 
-                thumbnail: { size: [200, 300], mode: outbound } 
+                thumbnail: { size: [300, 450], mode: outbound } 
                 
 
