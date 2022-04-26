@@ -39,7 +39,9 @@ class GeneratePictures extends Command
             $pictureFile = $imgItem->getPictureFile();
 
             if ($pictureFile) {
-                //je ne fait rien sil y a déjà une valeur dans pictureFile
+                
+                 continue;
+
             } else {
 
                 $img = $imgItem->getPicture();

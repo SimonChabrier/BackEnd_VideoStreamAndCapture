@@ -46,7 +46,9 @@ class CreatePictureUsingService extends Command
             $pictureFile = $image->getPictureFile();
 
             if ($pictureFile) {
-                //je ne fait rien sil y a déjà une valeur dans pictureFile
+
+                continue;
+                
             } else {
 
             $image->setPictureFile($this->jpegConverterService->convertPictureService($image->getPicture()));
