@@ -6,13 +6,9 @@
 /public/bundles/
 /var/
 /vendor/
-/public/
 *.DS_Store
-/public/assets/*
-assets/*
-**/assets/*
-**/assets/upload/
-**/assets/upload/
+/public/media/
+/public/upload/pictures/
 ###< symfony/framework-bundle ###
 
 ###> liip/imagine-bundle ###
