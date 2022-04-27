@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @ORM\Entity(repositoryClass=PictureRepository::class)
- * 
+ * @ORM\HasLifecycleCallbacks()
  */
 class Picture
 {
@@ -77,13 +77,20 @@ class Picture
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
-    {
-        $this->createdAt = $createdAt;
+    /**
+     * Set DateTime on Doctrine Prepersit 
+     * Think to use "@ORM\HasLifecycleCallbacks()" at the top of this class !
+     * 
+     * @ORM\PrePersist
+     * @param \DateTimeImmutable $createdAt
+     * @return self
+     */
 
-        return $this;
-    }
-
+     public function setCreatedAt()
+     {
+        $this->createdAt = new \DateTimeImmutable();
+     }
+    
     public function getLat(): ?string
     {
         return $this->lat;
@@ -111,11 +118,10 @@ class Picture
     public function getPictureFile(): ?string
     {
         return $this->pictureFile;
+        //https://symfonycasts.com/screencast/easyadminbundle/upload
+        //return sprintf('assets/upload/pictures/%s', $this->pictureFile);
     }
 
-    /**
-     * @ORM\PostPersist
-     */
     public function setPictureFile(?string $pictureFile): self
     {
         $this->pictureFile = $pictureFile;
@@ -123,6 +129,9 @@ class Picture
         return $this;
     }
 
-
-
+    //Pour Easy Admin
+    public function __toString(): string
+    {
+        return $this->pictureFile;
+    }
 }
