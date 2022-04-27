@@ -7,8 +7,8 @@
 /var/
 /vendor/
 *.DS_Store
-/public/media/
-/public/upload/pictures/*
+/public/assets/upload/
+/sql/
 ###< symfony/framework-bundle ###
 
 ###> liip/imagine-bundle ###
