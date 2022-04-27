@@ -9,9 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MainController extends AbstractController
 {
 
-
-    
-
     /**
      * @Route("/", name="app_main")
      */

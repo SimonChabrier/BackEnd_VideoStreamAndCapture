@@ -111,11 +111,10 @@ class Picture
     public function getPictureFile(): ?string
     {
         return $this->pictureFile;
+        //https://symfonycasts.com/screencast/easyadminbundle/upload
+        //return sprintf('assets/upload/pictures/%s', $this->pictureFile);
     }
 
-    /**
-     * @ORM\PostPersist
-     */
     public function setPictureFile(?string $pictureFile): self
     {
         $this->pictureFile = $pictureFile;
@@ -123,6 +122,9 @@ class Picture
         return $this;
     }
 
-
-
+    //Pour Easy Admin
+    public function __toString(): string
+    {
+        return $this->pictureFile;
+    }
 }
