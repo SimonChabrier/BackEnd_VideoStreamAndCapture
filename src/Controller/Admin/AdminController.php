@@ -41,7 +41,7 @@ class AdminController extends AbstractDashboardController
      */
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoRoute('Accueil', 'fas fa-home', 'app_main');
+        yield MenuItem::linktoRoute('Accueil', 'fas fa-home', 'app_login');
         yield MenuItem::linkToCrud('Images', 'fas fa-solid fa-image', Picture::class);
 
     }

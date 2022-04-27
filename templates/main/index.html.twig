@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Home Page{% endblock %}
 
 {% block body %}
-<h1>MAIN CONTROLLER - MAIN HOME</h1>
-<p>mettre ici le login pour l'admin et accéder au crud</p>
+
+<button type="button" class="btn btn-info">
+<a class="dropdown-item" href="{{ path('app_login') }}">Login</a>
+</button>   
 {% endblock %}
