@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @ORM\Entity(repositoryClass=PictureRepository::class)
- * 
+ * @ORM\HasLifecycleCallbacks()
  */
 class Picture
 {
@@ -77,13 +77,20 @@ class Picture
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
-    {
-        $this->createdAt = $createdAt;
+    /**
+     * Set DateTime on Doctrine Prepersit 
+     * Think to use "@ORM\HasLifecycleCallbacks()" at the top of this class !
+     * 
+     * @ORM\PrePersist
+     * @param \DateTimeImmutable $createdAt
+     * @return self
+     */
 
-        return $this;
-    }
-
+     public function setCreatedAt()
+     {
+        $this->createdAt = new \DateTimeImmutable();
+     }
+    
     public function getLat(): ?string
     {
         return $this->lat;
