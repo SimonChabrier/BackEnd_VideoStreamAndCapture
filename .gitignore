@@ -8,7 +8,7 @@
 /vendor/
 *.DS_Store
 /public/media/
-/public/upload/pictures/
+/public/upload/pictures/*
 ###< symfony/framework-bundle ###
 
 ###> liip/imagine-bundle ###
