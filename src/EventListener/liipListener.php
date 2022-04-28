@@ -19,13 +19,19 @@ use Liip\ImagineBundle\Service\FilterService;
 
 class liipListener 
 {
+    /**
+     * @var string
+     */
+    private $uploadParameter;
+
     // private $filterService; 
     //* Pas besoin de paramètre spécifique - le service est directement reconnu parce que apellé dans services.yaml suivant la doc liip
     //* Donc on utilise l'injection de dépendance directement - comme pour les autres classes de symfony.
 
-    public function __construct(FilterService $filterService)
+    public function __construct(FilterService $filterService, string $uploadParameter)
     {
         $this->filterService = $filterService;
+        $this->uploadParameter = $uploadParameter;
     }
     /**
      * Il faut ensuite regarder les paramètres du fichier services.yaml pour voir comment
@@ -35,8 +41,7 @@ class liipListener
      */
     public function cachePictureFile(Picture $picture)
     {   
-        $pictureName = $picture->getPictureFile(); // je récupère le nom du fichier
-        $path = '/assets/upload/pictures/'; //* je défini le path local pour lui dire où il va trouver l'image  à traiter
-        $this->filterService->getUrlOfFilteredImage($path.$pictureName, 'portrait'); //je reconstruit l'url + le nom duu fichier à traiter à l'event Doctrine et je lui passe le filtre
+        $this->filterService->getUrlOfFilteredImage($this->uploadParameter . $picture->getPictureFile(), 'portrait'); 
+        //je reconstruit l'url + le nom duu fichier à traiter à l'event Doctrine et je lui passe mon filtre liip
     }
 }
