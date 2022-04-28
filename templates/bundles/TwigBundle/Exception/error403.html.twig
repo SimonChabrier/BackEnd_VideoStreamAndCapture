@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Page réservée !{% endblock %}
+
+{% block body %}
+<div class = "errorPage">
+    <h1>Page réservée</h1>
+        <p>Code retour : {{ status_code }}</p>
+        <p>Vous devez être authentifié pour accéder à cette page !</p>
+    <button type="button" class="btn btn-lg btn-primary">
+        <a href="{{ path('app_main') }}">Admin - Login</a>
+    </button>   
+</div>
+{% endblock %}

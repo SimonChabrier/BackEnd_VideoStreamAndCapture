@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Page non trouvée !{% endblock %}
+
+{% block body %}
+<div class = "errorPage">
+    <h1>Page non trouvée</h1>
+        <p>Code retour : {{ status_code }}</p>
+        <p>Cette page n'existe pas !</p>
+    <button type="button" class="btn btn-lg btn-primary">
+        <a href="{{ path('app_main') }}">Admin - Login</a>
+    </button>   
+</div>
+{% endblock %}
