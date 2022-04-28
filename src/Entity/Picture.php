@@ -85,7 +85,6 @@ class Picture
      * @param \DateTimeImmutable $createdAt
      * @return self
      */
-
      public function setCreatedAt()
      {
         $this->createdAt = new \DateTimeImmutable();
