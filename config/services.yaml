@@ -7,7 +7,7 @@
 # Parmètre de stockage de mes fichiers images
 # je le déclare comme propriété dans mon service jpegConverterService!
 parameters:
-    picture_directory: 'assets/upload/pictures/'
+    upload_directory: 'assets/upload/pictures/'
     cache_directory: 'media/cache/portrait/assets/upload/pictures/'
       
 
@@ -17,9 +17,10 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         
-        # Je passe mon paramètre picture_directory dans une variable accessible globalement (->EasyAdminSubscriber.php)
+        # Je lie mon paramètre upload_directory et cache_director 
+        ## dans des variable accessible globalement (Eg voir : EasyAdminSubscriber.php)
         bind:
-            $pathParameter: '%picture_directory%'
+            $uploadParameter: '%upload_directory%'
             $cacheParameter: '%cache_directory%'
 
     # makes classes in src/ available to be used as services
@@ -39,10 +40,10 @@ services:
     Liip\ImagineBundle\Service\FilterService:
         alias: 'liip_imagine.service.filter'
     
-    # j'associe mon paramètre picture_directory à mon service jpegConverterService.
+    # j'associe mon paramètre upload_directory à mon service jpegConverterService.
     App\Service\jpegConverterService:
         arguments:
-            $targetDirectory: '%picture_directory%'
+            $targetDirectory: '%upload_directory%'
     
             
     # Mon listener sur Doctrine pour exploiter mon service jpegConverterService depuis PictureListener

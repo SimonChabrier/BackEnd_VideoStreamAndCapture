@@ -15,16 +15,16 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     /**
      * @var string
      */
-    private $pathParameter;
+    private $uploadParameter;
 
      /**
      * @var string
      */
     private $cacheParameter;
 
-    public function __construct(string $pathParameter, string $cacheParameter)
+    public function __construct(string $uploadParameter, string $cacheParameter)
     {
-        $this->pathParameter = $pathParameter;
+        $this->uploadParameter = $uploadParameter;
         $this->cacheParameter = $cacheParameter;
     }
 
@@ -43,7 +43,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             return;
         }
         // On supprime le fichir du disque si on supprime la picture dans l'admin panel.
-        unlink($this->pathParameter . $entity->getPictureFile());
+        unlink($this->uploadParameter . $entity->getPictureFile());
         unlink($this->cacheParameter . $entity->getPictureFile());
         unlink($this->cacheParameter . $entity->getPictureFile() . '.webp');
     }
