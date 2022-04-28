@@ -4,8 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 
-# Parmètre de stockage de mes fichiers images
-# je le déclare comme propriété dans mon service jpegConverterService!
+# Paramètre de stockage de mes fichiers images
 parameters:
     upload_directory: 'assets/upload/pictures/'
     cache_directory: 'media/cache/portrait/assets/upload/pictures/'
@@ -17,8 +16,8 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         
-        # Je lie mon paramètre upload_directory et cache_director 
-        ## dans des variable accessible globalement (Eg voir : EasyAdminSubscriber.php)
+        # Je lie mes paramètres upload_directory et cache_director 
+        # dans des variables accessibles globalement (Eg voir : EasyAdminSubscriber.php)
         bind:
             $uploadParameter: '%upload_directory%'
             $cacheParameter: '%cache_directory%'

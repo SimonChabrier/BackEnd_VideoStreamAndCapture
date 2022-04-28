@@ -42,7 +42,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if (!($entity instanceof Picture)) {
             return;
         }
-        // On supprime le fichir du disque si on supprime la picture dans l'admin panel.
+        // On supprime les fichirs du disque si on supprime la picture dans l'admin panel.
         unlink($this->uploadParameter . $entity->getPictureFile());
         unlink($this->cacheParameter . $entity->getPictureFile());
         unlink($this->cacheParameter . $entity->getPictureFile() . '.webp');
