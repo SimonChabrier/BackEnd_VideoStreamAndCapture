@@ -40,7 +40,7 @@ services:
     Liip\ImagineBundle\Service\FilterService:
         alias: 'liip_imagine.service.filter'
     
-            
+    
     # Mon listener sur Doctrine pour exploiter mon service jpegConverterService depuis PictureListener
     App\EventListener\PictureListener:
         tags:
