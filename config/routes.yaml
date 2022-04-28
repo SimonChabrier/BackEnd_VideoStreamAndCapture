@@ -4,3 +4,11 @@
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.yaml"
+
+# add this to test errors page temlate in dev env
+# https://symfony.com/doc/5.4/controller/error_pages.html
+# Else try this for control :
+# http://127.0.0.1:8000/_error/404
+_errors:
+    resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+    prefix: /_error

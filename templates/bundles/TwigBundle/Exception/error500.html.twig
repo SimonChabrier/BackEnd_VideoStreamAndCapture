@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Erreur Serveur !{% endblock %}
+
+{% block body %}
+<div class = "errorPage">
+    <h1>Erreur Serveur </h1>
+        <p>Code retour : {{ status_code }}</p>
+        <p>Erreur interne du serveur dans le protocole de communication http</p>
+    <button type="button" class="btn btn-lg btn-primary">
+        <a href="{{ path('app_main') }}">Admin - Login</a>
+    </button>   
+</div>
+{% endblock %}
