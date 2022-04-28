@@ -8,6 +8,7 @@
 # je le déclare comme propriété dans mon service jpegConverterService!
 parameters:
     picture_directory: 'assets/upload/pictures/'
+    #pictureFile: '$pictureFile'    
     
 
 
@@ -38,6 +39,7 @@ services:
     App\Service\jpegConverterService:
         arguments:
             $targetDirectory: '%picture_directory%'
+    
             
     # Mon listener sur Doctrine pour exploiter mon service jpegConverterService depuis PictureListener
     App\EventListener\PictureListener:
