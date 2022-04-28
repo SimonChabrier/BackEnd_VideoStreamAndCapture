@@ -9,6 +9,8 @@
 parameters:
     picture_directory: 'assets/upload/pictures/'
     
+
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -23,8 +25,12 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    
+    
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Appel du service Cache Manager de LiipImagineBundle
     Liip\ImagineBundle\Service\FilterService:
         alias: 'liip_imagine.service.filter'
     
@@ -33,7 +39,7 @@ services:
         arguments:
             $targetDirectory: '%picture_directory%'
             
-    #Mon listener sur Doctrine pour exploiter mon service jpegConcerterService depuis PictureListener
+    # Mon listener sur Doctrine pour exploiter mon service jpegConverterService depuis PictureListener
     App\EventListener\PictureListener:
         tags:
             -
@@ -51,7 +57,7 @@ services:
                 entity: App\Entity\Picture
                 method: updatePictureFile    
 
-     # Mon listener sur Doctrine pour exploiter mon service jpegConcerterService depuis PictureListener
+    # Mon listener sur Doctrine pour exploiter mon service jpegConverterService depuis PictureListener
     App\EventListener\liipListener:
         tags:
             -
