@@ -10,6 +10,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+
+
+
 class AdminController extends AbstractDashboardController
 {
     /**
@@ -33,6 +37,7 @@ class AdminController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('BackOffice JS-PB');
     }
+
 
     /**
      * Main menu items

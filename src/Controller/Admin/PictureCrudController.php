@@ -2,12 +2,14 @@
 
 namespace App\Controller\Admin;
 
-
 use App\Entity\Picture;
-//use DateTime;
-//use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
-//use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+// use DateTime;
+// use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+// use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 // use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
@@ -19,7 +21,6 @@ class PictureCrudController extends AbstractCrudController
 {   
     /**
      * Set the entity we use 
-     *
      * @return string
      */
     public static function getEntityFqcn(): string
@@ -27,9 +28,6 @@ class PictureCrudController extends AbstractCrudController
         return Picture::class;
     }
 
-    //configuration du CRUD
-    //todo il faut faire un form 
-    //todo An error has occurred resolving the options of the form "Symfony\Bridge\Doctrine\Form\Type\EntityType": The required option "class" is missing.
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -39,24 +37,27 @@ class PictureCrudController extends AbstractCrudController
         ;
     }
 
-    // On détermine quels filtres apparaissent au dessus du champ de recherche
-    // Comme je n'ai pas de fomulaire pour uploader une image ça ne peut pas être utilisé actuellement.
-    // je n'ai pas de raltions on plus pour déterminer des filtres.
-    // public function configureFilters(Filters $filters): Filters
-    // {
-    //     return $filters
-    //         ->add(EntityFilter::new('picture'))
-    //     ;
-    // }
+    /**
+     * Hide actions on admin panel
+     * @return Actions
+     */
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
 
-    //champs affichés dans l'admin du crud
+        ->disable(Action::NEW, Action::EDIT)
+        ;
+    }
+
+    /**
+     * Configure displayed fields
+     * @return iterable
+     */
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id'),
-            ImageField::new('pictureFile')
-            ->setBasePath('media/cache/portrait/assets/upload/pictures'),
-            //->setUploadDir('assets/upload/pictures'),
+            ImageField::new('pictureFile')->setBasePath('media/cache/portrait/assets/upload/pictures'),
             DateField::new('createdAt'),
             TextField::new('lat'),
             TextField::new('lng'),
