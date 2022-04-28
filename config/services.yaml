@@ -40,11 +40,6 @@ services:
     Liip\ImagineBundle\Service\FilterService:
         alias: 'liip_imagine.service.filter'
     
-    # j'associe mon paramètre upload_directory à mon service jpegConverterService.
-    App\Service\jpegConverterService:
-        arguments:
-            $targetDirectory: '%upload_directory%'
-    
             
     # Mon listener sur Doctrine pour exploiter mon service jpegConverterService depuis PictureListener
     App\EventListener\PictureListener:
