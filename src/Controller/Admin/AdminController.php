@@ -27,6 +27,7 @@ class AdminController extends AbstractDashboardController
 
         return $this->redirect($url);
     }
+
     /**
      * Main Admin Dashboard
      *
@@ -37,7 +38,6 @@ class AdminController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('BackOffice JS-PB');
     }
-
 
     /**
      * Main menu items
