@@ -59,7 +59,7 @@ services:
                 entity: App\Entity\Picture
                 method: updatePictureFile    
 
-    # Mon listener sur Doctrine pour exploiter mon service jpegConverterService depuis PictureListener
+    # Mon listener sur Doctrine pour ma méthode cachePictureFile qui construit le cache à chaque nouvelle image postée.
     App\EventListener\liipListener:
         tags:
             -
