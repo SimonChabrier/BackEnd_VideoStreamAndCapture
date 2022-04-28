@@ -1,6 +1,7 @@
 <?php
 
 // https://symfony.com/doc/5.4/event_dispatcher.html#event-aliases
+// https://www.php.net/manual/en/function.unlink.php
 
 namespace App\EventSubscriber;
 
@@ -16,9 +17,15 @@ class EasyAdminSubscriber implements EventSubscriberInterface
      */
     private $pathParameter;
 
-    public function __construct(string $pathParameter)
+     /**
+     * @var string
+     */
+    private $cacheParameter;
+
+    public function __construct(string $pathParameter, string $cacheParameter)
     {
         $this->pathParameter = $pathParameter;
+        $this->cacheParameter = $cacheParameter;
     }
 
     public static function getSubscribedEvents()
@@ -35,19 +42,9 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if (!($entity instanceof Picture)) {
             return;
         }
-
-        // ça ça marche
-        //$fileToDelete = 'assets/upload/pictures/' . '626ac1c99d4ca.jpeg' ;
-        // $path = 'assets/upload/pictures/';
-        // $image = $entity->getPictureFile();
-        // $fileToDelete = $path . $image;
-
-        $image = $entity->getPictureFile();        
-        $fileToDelete = $this->pathParameter . $image;
-        
-        
-
-
-        unlink($fileToDelete);
+        // On supprime le fichir du disque si on supprime la picture dans l'admin panel.
+        unlink($this->pathParameter . $entity->getPictureFile());
+        unlink($this->cacheParameter . $entity->getPictureFile());
+        unlink($this->cacheParameter . $entity->getPictureFile() . '.webp');
     }
 }
