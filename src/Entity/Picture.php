@@ -118,8 +118,7 @@ class Picture
     public function getPictureFile(): ?string
     {
         return $this->pictureFile;
-        //https://symfonycasts.com/screencast/easyadminbundle/upload
-        //return sprintf('assets/upload/pictures/%s', $this->pictureFile);
+
     }
 
     public function setPictureFile(?string $pictureFile): self
