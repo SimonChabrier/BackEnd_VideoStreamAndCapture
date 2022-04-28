@@ -11,6 +11,15 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class EasyAdminSubscriber implements EventSubscriberInterface
 {   
 
+    /**
+     * @var string
+     */
+    private $pathParameter;
+
+    public function __construct(string $pathParameter)
+    {
+        $this->pathParameter = $pathParameter;
+    }
 
     public static function getSubscribedEvents()
     {
@@ -27,16 +36,18 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             return;
         }
 
-        
         // ça ça marche
         //$fileToDelete = 'assets/upload/pictures/' . '626ac1c99d4ca.jpeg' ;
+        // $path = 'assets/upload/pictures/';
+        // $image = $entity->getPictureFile();
+        // $fileToDelete = $path . $image;
 
-        $path = 'assets/upload/pictures/';
-        $image = $entity->getPictureFile();
-        // $image = $this->getPictureFile();        
-        //$fileToDelete = $this->getParameter('picture_directory') . $pictureFile->getPictureFile() ;
+        $image = $entity->getPictureFile();        
+        $fileToDelete = $this->pathParameter . $image;
         
-        $fileToDelete = $path.$image;
+        
+
+
         unlink($fileToDelete);
     }
 }
