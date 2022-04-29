@@ -125,4 +125,5 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->username;
     }
+
 }

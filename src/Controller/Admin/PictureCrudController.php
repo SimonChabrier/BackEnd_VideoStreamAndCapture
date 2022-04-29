@@ -3,11 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Picture;
-// use DateTime;
-// use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
-// use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
-// use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -57,7 +53,8 @@ class PictureCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id'),
-            ImageField::new('pictureFile')->setBasePath('media/cache/portrait/assets/upload/pictures'),
+            ImageField::new('pictureFile')
+            ->setBasePath('media/cache/portrait/assets/upload/pictures'),
             DateField::new('createdAt'),
             TextField::new('lat'),
             TextField::new('lng'),
@@ -65,4 +62,14 @@ class PictureCrudController extends AbstractCrudController
 
     }
 
+    /**
+     * Configure Filters
+     * @return Filters
+     */
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('createdAt')
+        ;
+    }
 }

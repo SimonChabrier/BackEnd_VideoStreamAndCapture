@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Picture;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -10,13 +12,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-
-
-
 class AdminController extends AbstractDashboardController
 {
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin", name="app_admin")
      * composer require symfony/mime
      */
@@ -30,7 +29,6 @@ class AdminController extends AbstractDashboardController
 
     /**
      * Main Admin Dashboard
-     *
      * @return Dashboard
      */
     public function configureDashboard(): Dashboard
@@ -50,6 +48,5 @@ class AdminController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Images', 'fas fa-solid fa-image', Picture::class);
 
     }
-
 
 }
