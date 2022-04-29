@@ -17,6 +17,12 @@ class MainController extends AbstractController
      */
     public function index( ): Response
     {       
+        // si il y a un user et qu'il est déjà identifié
+        // https://symfony.com/doc/current/controller.html#redirecting
+        if($this->getUser() && 'IS_AUTHENTICATED_FULLY'){
+            return $this->redirectToRoute('app_admin');
+        };
+        // sinon :
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
         ]);
