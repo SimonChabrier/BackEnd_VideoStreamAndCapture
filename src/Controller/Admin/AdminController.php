@@ -17,7 +17,6 @@ class AdminController extends AbstractDashboardController
     /**
      * @IsGranted("ROLE_ADMIN")
      * @Route("/admin", name="app_admin")
-     * composer require symfony/mime
      */
     public function index(): Response
     {
@@ -28,7 +27,7 @@ class AdminController extends AbstractDashboardController
     }
 
     /**
-     * Main Admin Dashboard
+     * Main Admin Dashboard Title
      * @return Dashboard
      */
     public function configureDashboard(): Dashboard
@@ -38,13 +37,15 @@ class AdminController extends AbstractDashboardController
     }
 
     /**
-     * Main menu items
-     * linked to each entity crud we have
+     * Main menu items in left list
+     * link here each entity crud we have
+     * and/or ad more links
      * @return iterable
      */
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoRoute('Accueil', 'fas fa-home', 'app_login');
+        yield MenuItem::linkToUrl('Front', 'fas fa-map', 'https://js.simschab.fr/cam/index.html');
         yield MenuItem::linkToCrud('Images', 'fas fa-solid fa-image', Picture::class);
 
     }
