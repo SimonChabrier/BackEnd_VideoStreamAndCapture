@@ -40,8 +40,8 @@ security:
                 # activate remember_me cookie on all domain
                 path: /
                 # here we store the remeber_me token in database using doctrine.
-                # token_provider:
-                #     doctrine: true
+                token_provider:
+                    doctrine: true
 
         # by default, the feature is enabled by checking a
         # checkbox in the login form (see below), uncomment the
