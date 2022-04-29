@@ -34,7 +34,7 @@ class AdminController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Mon Backoffice');
+            ->setTitle('<img src="https://picsum.photos/100/100"/>');
     }
 
     /**

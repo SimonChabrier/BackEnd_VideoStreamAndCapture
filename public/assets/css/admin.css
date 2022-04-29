@@ -24,8 +24,20 @@ h1 {
     background: white;
 }
 
+.main-header {
+    text-align: center;
+}
+
+.logo-custom img {
+    border-radius: 100%;
+}
+
 .logo-custom {
     color: #5367D5;
+}
+
+.main-header #header-logo a {
+    padding: 17px 0;
 }
 
 .menu-icon {
@@ -33,5 +45,5 @@ h1 {
 }
 
 .datagrid .ea-lightbox-thumbnail img {
-    max-height: 20vh;
+    max-height: 13vh;
 }
