@@ -127,9 +127,4 @@ class Picture
         return $this;
     }
 
-    //Pour Easy Admin
-    public function __toString(): string
-    {
-        return $this->pictureFile;
-    }
 }

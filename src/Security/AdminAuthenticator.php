@@ -49,8 +49,9 @@ class AdminAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        // For example:
+        // Redirect after Login succesfull
         return new RedirectResponse($this->urlGenerator->generate('app_admin'));
+        
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

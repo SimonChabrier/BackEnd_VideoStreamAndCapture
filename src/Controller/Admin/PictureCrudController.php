@@ -30,6 +30,9 @@ class PictureCrudController extends AbstractCrudController
 
             ->setSearchFields(['createdAt'])
             ->setDefaultSort(['createdAt' => 'DESC'])
+            // Si je n'ai pas fermé la visibilité dans la sidebar dans AdminController.php : configureMenuItems()
+            // alors, ici je peux aussi décider de cacher le contenu de ce CRUD aux rôle non autorisés
+            ->setEntityPermission('ROLE_ADMIN')
         ;
     }
 
@@ -55,6 +58,7 @@ class PictureCrudController extends AbstractCrudController
             IdField::new('id'),
             ImageField::new('pictureFile')
             ->setBasePath('media/cache/portrait/assets/upload/pictures'),
+            TextField::new('pictureFile'),
             DateField::new('createdAt'),
             TextField::new('lat'),
             TextField::new('lng'),

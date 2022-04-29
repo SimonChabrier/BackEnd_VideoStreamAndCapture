@@ -40,6 +40,7 @@ class AdminController extends AbstractDashboardController
      * Main menu items in left list
      * link here each entity crud we have
      * and/or ad more links
+     * https://symfony.com/doc/current/EasyAdminBundle/dashboards.html#menu-item-configuration-options
      * @return iterable
      */
     public function configureMenuItems(): iterable
@@ -50,10 +51,10 @@ class AdminController extends AbstractDashboardController
         yield MenuItem::section('Site Public');
         yield MenuItem::linkToUrl('Front', 'fas fa-map', 'https://js.simschab.fr/cam/index.html');
         yield MenuItem::section('Administrer');
-        yield MenuItem::linkToCrud('Images', 'fas fa-solid fa-image', Picture::class);
+        // je linke le crud de ma classe Picture et autorise les modifications sur cette classe uniquement pour le rôle admin.
+        // les autres rôles ne verront pas les liens dans la sidebar
+        yield MenuItem::linkToCrud('Images', 'fas fa-solid fa-image', Picture::class)->setPermission('ROLE_ADMIN');
        
-        
-
     }
 
 }
