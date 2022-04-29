@@ -33,7 +33,7 @@ class AdminController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('BackOffice JS-PB');
+            ->setTitle('Mon Backoffice');
     }
 
     /**
@@ -43,10 +43,14 @@ class AdminController extends AbstractDashboardController
      * @return iterable
      */
     public function configureMenuItems(): iterable
-    {
+    {   
+        yield MenuItem::section('Home');
         yield MenuItem::linktoRoute('Accueil', 'fas fa-home', 'app_login');
+        yield MenuItem::section('Site Public');
         yield MenuItem::linkToUrl('Front', 'fas fa-map', 'https://js.simschab.fr/cam/index.html');
+        yield MenuItem::section('Administrer');
         yield MenuItem::linkToCrud('Images', 'fas fa-solid fa-image', Picture::class);
+        
 
     }
 
