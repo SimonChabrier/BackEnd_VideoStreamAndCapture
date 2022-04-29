@@ -34,7 +34,8 @@ class AdminController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('<img src="https://picsum.photos/100/100"/>');
+            ->setTitle('<img src="https://picsum.photos/100/100"/>')
+        ;
     }
 
     /**
@@ -54,7 +55,8 @@ class AdminController extends AbstractDashboardController
         yield MenuItem::section('Administrer');
         // je linke le crud de ma classe Picture et autorise les modifications sur cette classe uniquement pour le rôle admin.
         // les autres rôles ne verront pas les liens dans la sidebar
-        yield MenuItem::linkToCrud('Images', 'fas fa-solid fa-image', Picture::class)->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Images', 'fas fa-solid fa-image', Picture::class)->setPermission('ROLE_ADMIN')
+        ;
        
     }
     /**
@@ -63,7 +65,10 @@ class AdminController extends AbstractDashboardController
      */
     public function configureAssets(): Assets
     {
-        return Assets::new()->addCssFile('assets/css/admin.css');
+        return Assets::new()
+        ->addCssFile('assets/css/admin.css')
+        ->addHtmlContentToHead('<link rel="shortcut icon" href="favicon.ico">')
+        ;
     }
 
 }
