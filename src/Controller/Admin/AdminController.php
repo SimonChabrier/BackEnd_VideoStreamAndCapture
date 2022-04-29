@@ -45,7 +45,7 @@ class AdminController extends AbstractDashboardController
      */
     public function configureMenuItems(): iterable
     {   
-        yield MenuItem::linkToLogout('Logout', 'fa fa-circle');
+        yield MenuItem::linkToLogout('Logout', 'fa fa-fw fa-sign-out');
         yield MenuItem::section('Home');
         yield MenuItem::linktoRoute('Accueil', 'fas fa-home', 'app_login');
         yield MenuItem::section('Site Public');
