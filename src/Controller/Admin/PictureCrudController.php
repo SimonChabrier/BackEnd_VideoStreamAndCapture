@@ -25,8 +25,7 @@ class PictureCrudController extends AbstractCrudController
     }
 
     /**
-     * Set PictureCrud 
-     * global config.
+     * This crud global config.
      * https://symfony.com/bundles/EasyAdminBundle/current/crud.html#search-order-and-pagination-options
      */
     public function configureCrud(Crud $crud): Crud
@@ -41,13 +40,13 @@ class PictureCrudController extends AbstractCrudController
             ->setPaginatorPageSize(10)
             ->setPaginatorRangeSize(4)
             // https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/tutorials/pagination.html
-            //->setPaginatorUseOutputWalkers(true)
+            // ->setPaginatorUseOutputWalkers(true)
             // ->setPaginatorFetchJoinCollection(true)
         ;
     }
 
     /**
-     * Hide actions on admin panel
+     * This crud hide actions
      * @return Actions
      */
     public function configureActions(Actions $actions): Actions
@@ -59,7 +58,7 @@ class PictureCrudController extends AbstractCrudController
     }
 
     /**
-     * Configure displayed fields
+     * This crud displayed fields
      * @return iterable
      */
     public function configureFields(string $pageName): iterable
@@ -77,7 +76,7 @@ class PictureCrudController extends AbstractCrudController
     }
 
     /**
-     * Configure Filters
+     * This crud Filters
      * @return Filters
      */
     public function configureFilters(Filters $filters): Filters
