@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Picture;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -55,6 +56,13 @@ class AdminController extends AbstractDashboardController
         // les autres rôles ne verront pas les liens dans la sidebar
         yield MenuItem::linkToCrud('Images', 'fas fa-solid fa-image', Picture::class)->setPermission('ROLE_ADMIN');
        
+    }
+    /**
+     * Personalize Admin Css
+     */
+    public function configureAssets(): Assets
+    {
+        return Assets::new()->addCssFile('assets/css/admin.css');
     }
 
 }

@@ -74,6 +74,7 @@ class PictureCrudController extends AbstractCrudController
     {
         return $filters
             ->add('createdAt')
+            ->add('pictureFile')
         ;
     }
 }

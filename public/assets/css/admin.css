@@ -1,0 +1,38 @@
+/* public/css/admin.css */
+:root {
+    /* make the backend contents as wide as the browser window */
+    --body-max-width: 100%;
+    /* change the background color of the  */
+    --body-bg: #f5f5f5;
+    /* make the base font size smaller */
+    --font-size-base: 14px;
+    /* remove all border radius to make corners straight */
+    --border-radius: 0px;
+}
+
+h1 {
+    color: #5367D5;
+}
+
+.content-top {
+    background: #cdcdcd;
+}
+.content-search-icon {
+    margin-right: 0.5rem!important;
+}
+
+.sidebar{
+    background: white;
+}
+
+.logo-custom {
+    color: #5367D5;
+}
+
+.menu-icon {
+    color: black!important;
+}
+
+.datagrid .ea-lightbox-thumbnail img {
+    max-height: 20vh;
+}
