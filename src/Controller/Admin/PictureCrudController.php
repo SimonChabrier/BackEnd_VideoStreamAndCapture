@@ -24,6 +24,11 @@ class PictureCrudController extends AbstractCrudController
         return Picture::class;
     }
 
+    /**
+     * Set PictureCrud 
+     * global config.
+     * https://symfony.com/bundles/EasyAdminBundle/current/crud.html#search-order-and-pagination-options
+     */
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -33,6 +38,11 @@ class PictureCrudController extends AbstractCrudController
             // Si je n'ai pas fermé la visibilité dans la sidebar dans AdminController.php : configureMenuItems()
             // alors, ici je peux aussi décider de cacher le contenu de ce CRUD aux rôle non autorisés
             ->setEntityPermission('ROLE_ADMIN')
+            ->setPaginatorPageSize(10)
+            ->setPaginatorRangeSize(4)
+            // https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/tutorials/pagination.html
+            //->setPaginatorUseOutputWalkers(true)
+            // ->setPaginatorFetchJoinCollection(true)
         ;
     }
 
