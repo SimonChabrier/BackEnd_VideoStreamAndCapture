@@ -44,12 +44,13 @@ class AdminAuthenticator extends AbstractLoginFormAuthenticator
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
-    {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-            return new RedirectResponse($targetPath);
-        }
+    {   
+        
+        // if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+        //     return new RedirectResponse($targetPath);
+        // }
 
-        // Redirect after Login succesfull
+        // Custom redirect after Login succesfull
         return new RedirectResponse($this->urlGenerator->generate('app_admin'));
         
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
