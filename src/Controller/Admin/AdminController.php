@@ -59,6 +59,7 @@ class AdminController extends AbstractDashboardController
     }
     /**
      * Personalize Admin Css
+     * https://symfony.com/bundles/EasyAdminBundle/current/design.html#customizing-the-backend-design
      */
     public function configureAssets(): Assets
     {
