@@ -24,13 +24,11 @@ class ApiController extends AbstractController
         ValidatorInterface $validator
     ): Response
     {   
-        
+       
         $data = $request->getContent();
     
         $picture = $serializer->deserialize($data, Picture::class, 'json');
        
-
-        //todo il faudrait convertir l'image et la persister
         $errors = $validator->validate($picture);
 
         if (count($errors) > 0) {
@@ -43,15 +41,11 @@ class ApiController extends AbstractController
         $doctrine->persist($picture);
         
         $doctrine->flush();
-
+     
         return $this->json(
             $picture,
             Response::HTTP_CREATED,
             [],
-            // ici dans insomnia à gauche je ne verrai que les infos que j'ai associé au groupe 'mongroupe'
-            // par contre celui qui fait le send peut remplir toutes les propriétés de l'objet
-            // il faut donc lui fournir le détail des propriétés pour qu'il puisse faire une requête complète et valide
-            //['groups' => ['mongroupe']]
         );
     }
 
@@ -71,8 +65,6 @@ class ApiController extends AbstractController
         [],
         // Contexte
         ['groups' => 'api_post'],
-        // Contexte de serialisation, les groups de propriété que l'on veux serialiser si on a fait des groupes
-        //['groups'=> 'groupe_x']
         );
     }
 
