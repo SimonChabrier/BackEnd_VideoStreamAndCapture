@@ -26,7 +26,9 @@ class ApiController extends AbstractController
     {   
         
         $data = $request->getContent();
+    
         $picture = $serializer->deserialize($data, Picture::class, 'json');
+       
 
         //todo il faudrait convertir l'image et la persister
         $errors = $validator->validate($picture);

@@ -6,6 +6,8 @@ use Symfony\Component\Serializer\Annotation\Groups as Groups;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PictureRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\Null_;
+
 // use Symfony\Component\Serializer\Annotation\Groups;
 // https://symfony.com/doc/current/serializer.html#using-serialization-groups-annotations
 
@@ -23,12 +25,7 @@ class Picture
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="text")
-     * @ORM\OrderBy({"picture" = "DESC"})
-     */
-    private $picture;
-
+  
     /**
      * @ORM\OrderBy({"createdAt" = "DESC"})
      * @ORM\Column(type="datetime_immutable")
@@ -53,6 +50,7 @@ class Picture
      */
     private $pictureFile;
 
+    private $picture;
     
     public function getId(): ?int
     {
@@ -65,11 +63,25 @@ class Picture
         return $this->picture;
     }
 
-    public function setPicture(string $picture): self
-    {
 
+    public function setPicture(string $picture = null): self
+    {
+        
         $this->picture = $picture;
   
+        return $this;
+    }
+
+    public function getPictureFile(): ?string
+    {
+        return $this->pictureFile;
+
+    }
+
+    public function setPictureFile(?string $pictureFile): self
+    {
+        $this->pictureFile = $pictureFile;
+
         return $this;
     }
 
@@ -115,17 +127,5 @@ class Picture
         return $this;
     }
 
-    public function getPictureFile(): ?string
-    {
-        return $this->pictureFile;
-
-    }
-
-    public function setPictureFile(?string $pictureFile): self
-    {
-        $this->pictureFile = $pictureFile;
-
-        return $this;
-    }
 
 }

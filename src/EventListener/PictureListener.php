@@ -30,8 +30,15 @@ class PictureListener
      */
     public function updatePictureFile(Picture $picture)
     {   
+        $nullPicture = null;
+
         $pictureFile = $this->img->convertPictureService($picture->getPicture());
         $picture->setPictureFile($pictureFile);
+
+        // le fichier Jpg est crée 
+        // je sette la valeur de l'objet Picture persistée à null 
+        $picture->setPicture($nullPicture);
+
 
         
     }

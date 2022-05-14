@@ -16,7 +16,7 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         
-        # Je lie mes paramètres upload_directory et cache_director 
+        # Je lie mes paramètres upload_directory et cache_directory 
         # dans des variables accessibles globalement (Eg voir : EasyAdminSubscriber.php)
         bind:
             $uploadParameter: '%upload_directory%'
