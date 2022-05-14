@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Entity;
-use App\Service\jpegConverterService;
 use Symfony\Component\Serializer\Annotation\Groups as Groups;
 use Doctrine\ORM\Mapping as ORM;
+//PictureRepository is used by EasyAdmin on Delete a Picture Objet
 use App\Repository\PictureRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Types\Null_;
+
 
 // use Symfony\Component\Serializer\Annotation\Groups;
 // https://symfony.com/doc/current/serializer.html#using-serialization-groups-annotations
@@ -50,6 +49,9 @@ class Picture
      */
     private $pictureFile;
 
+    // J'utilise $picture uniquement pour récupèrer le Base64 envpyé en Json
+    // tout le traitement de cette valeur de l'objet Picture est traitée dans les services
+    // pour créer $pictureFile en fin de process.
     private $picture;
     
     public function getId(): ?int
@@ -59,29 +61,25 @@ class Picture
 
     public function getPicture(): ?string
     {   
-       
         return $this->picture;
     }
 
 
-    public function setPicture(string $picture = null): self
+    public function setPicture(string $picture): self
     {
-        
         $this->picture = $picture;
-  
         return $this;
     }
 
     public function getPictureFile(): ?string
     {
         return $this->pictureFile;
-
     }
 
+    // Created by jpegConverterService on Doctrine Pre Update Event
     public function setPictureFile(?string $pictureFile): self
     {
         $this->pictureFile = $pictureFile;
-
         return $this;
     }
 
