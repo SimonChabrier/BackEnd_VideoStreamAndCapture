@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Entity;
-use App\Service\jpegConverterService;
 use Symfony\Component\Serializer\Annotation\Groups as Groups;
 use Doctrine\ORM\Mapping as ORM;
+//PictureRepository is used by EasyAdmin on Delete a Picture Objet
 use App\Repository\PictureRepository;
-use Doctrine\ORM\EntityManagerInterface;
+
+
 // use Symfony\Component\Serializer\Annotation\Groups;
 // https://symfony.com/doc/current/serializer.html#using-serialization-groups-annotations
 
@@ -23,12 +24,7 @@ class Picture
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="text")
-     * @ORM\OrderBy({"picture" = "DESC"})
-     */
-    private $picture;
-
+  
     /**
      * @ORM\OrderBy({"createdAt" = "DESC"})
      * @ORM\Column(type="datetime_immutable")
@@ -53,6 +49,10 @@ class Picture
      */
     private $pictureFile;
 
+    // J'utilise $picture uniquement pour récupèrer le Base64 envpyé en Json
+    // tout le traitement de cette valeur de l'objet Picture est traitée dans les services
+    // pour créer $pictureFile en fin de process.
+    private $picture;
     
     public function getId(): ?int
     {
@@ -61,15 +61,25 @@ class Picture
 
     public function getPicture(): ?string
     {   
-       
         return $this->picture;
     }
 
+
     public function setPicture(string $picture): self
     {
-
         $this->picture = $picture;
-  
+        return $this;
+    }
+
+    public function getPictureFile(): ?string
+    {
+        return $this->pictureFile;
+    }
+
+    // Created by jpegConverterService on Doctrine Pre Update Event
+    public function setPictureFile(?string $pictureFile): self
+    {
+        $this->pictureFile = $pictureFile;
         return $this;
     }
 
@@ -115,17 +125,5 @@ class Picture
         return $this;
     }
 
-    public function getPictureFile(): ?string
-    {
-        return $this->pictureFile;
-
-    }
-
-    public function setPictureFile(?string $pictureFile): self
-    {
-        $this->pictureFile = $pictureFile;
-
-        return $this;
-    }
 
 }

@@ -8,31 +8,29 @@ use App\Service\jpegConverterService;
 
 class PictureListener 
 {
-    private $img;
 
-
-    // ici a chaque mise à jour d'une Picture je vais demander de me créer le Fichier jpeg
+    // ici a chaque mise à jour d'une Picture
+    // je vais demander de me créer le Fichier jpeg
     // en apellant mon service jpegConverterService
     // le paramètrage de ce listener est déclaré dans le fichier services.yaml
 
     // j'apelle le contructeur pour accèder aux propriétés de jpegConverterService service
-    public function __construct(jpegConverterService $img)
+    public function __construct(jpegConverterService $jpegConverterService)
     {
-        $this->img = $img; 
+        $this->jpegConverterService = $jpegConverterService; 
   
     }
 
     /**
-     * Il faut ensuite regarder les paramètres du fichier services.yaml pour voir comment
-     * est apellé cette méthode et à quel moment dans le parcours doctrine
+     * Voir services.yaml
+     * qui apelle cette méthode sur les evenements Doctrine
      * @param Picture $picture
      * @return void
      */
     public function updatePictureFile(Picture $picture)
     {   
-        $pictureFile = $this->img->convertPictureService($picture->getPicture());
+        $pictureFile = $this->jpegConverterService->convertBase64ToJgeg($picture->getPicture());
         $picture->setPictureFile($pictureFile);
-
         
     }
 }
