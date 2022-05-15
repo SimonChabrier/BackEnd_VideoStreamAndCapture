@@ -36,7 +36,7 @@ services:
     # please note that last definitions always *replace* previous ones
 
     # Déclaration du service Cache Manager de LiipImagineBundle
-    # pour l'injecter dans liipListener.php
+    # pour l'injecter dans PictureListener.php
     Liip\ImagineBundle\Service\FilterService:
         alias: 'liip_imagine.service.filter'
     
