@@ -42,18 +42,14 @@ services:
     
     
     # EventListener : PictureListener sur Doctrine
-    # J'y injecte mon service jpegConverterService
+    # J'y injecte les Class de Service jpegConverterService (perso) & FilterService (de Liip)
     # à chaque foi qu'on instancie un nouvel objet Picture.
+    # dans la méthode processPictureFile() de PictureListener :
     # On accède à la méthode convertBase64ToJgeg() de jpegConverterService
-    # dans la méthode processPictureFile() de PictureListener
-    # J'y injecte le service : FilterService (Classe de Service du bundle Liip)
-    # à chaque foi qu'on instancie un nouvel objet Picture.
-    # On accède à ma méthode cachePictureFile() sur l'objet Picture courant.
-    # dans laquelle on utilise getUrlOfFilteredImage() de la Classe FilterService
-    # On passe sur la valeur de la valeur retrounée par getPictureFile() un filtre configuré dans liip_imagine.yaml 
-    # Le filtre traite et le met en cache le fichier image.
-    # Faire tout le process directement dans le back-end
-    # permet de servir au client (ou view) un fichier image directement dans sa version optimisée => Gain de performance et de clarté dans le code.
+    # On accède à ma méthode getUrlOfFilteredImage() de FilterService
+    # Le process complet detraitement des images est automatisé dans le back-end
+    # base64->jpeg / Stockage du fichier jpeg en local / ->setPictureFile($nouveauNomAPersister) / Filtrage Liip / Mise en cache Liip
+    # On sert directement au client une image traitée et optimisée.
     App\EventListener\PictureListener:
         tags:
             -
