@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Entity;
-use Symfony\Component\Serializer\Annotation\Groups as Groups;
 use Doctrine\ORM\Mapping as ORM;
-//PictureRepository is used by EasyAdmin on Delete a Picture Objet
 use App\Repository\PictureRepository;
+//PictureRepository is used by EasyAdmin on Delete a Picture Objet
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Annotation\Groups as Groups;
 
 
 // use Symfony\Component\Serializer\Annotation\Groups;
@@ -53,7 +54,8 @@ class Picture
     // tout le traitement de cette valeur de l'objet Picture est traitée dans les services
     // pour créer $pictureFile en fin de process.
     private $picture;
-    
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -66,9 +68,25 @@ class Picture
 
 
     public function setPicture(string $picture): self
-    {
-        $this->picture = $picture;
-        return $this;
+    {   
+        //On verifie la présence impérative de cette valeur dans 
+        //le Json reçue sur /api/post
+        $search ='data:image/jpeg;base64,';
+        //$search ='Wahhhh';
+
+        if(strpos($picture, $search) !== false)
+        {
+            $this->picture = $picture;
+            return $this;
+        }
+
+        // sinon on ferme tout
+        // j'ai bien un code retour 403
+        $response = new Response();
+        $response->setStatusCode(Response::HTTP_FORBIDDEN);
+        // verif insomnia
+        // dd($response);
+        return $response->send();
     }
 
     public function getPictureFile(): ?string
@@ -107,7 +125,13 @@ class Picture
     }
 
     public function setLat(?string $lat): self
-    {
+    {   
+        // si on a pas de valeur de lat venant du front on setLat à null
+        if ($lat === ""){
+            $this->lat === null;
+            return $this;
+        }
+        // sinon
         $this->lat = $lat;
 
         return $this;
@@ -120,6 +144,12 @@ class Picture
 
     public function setLng(?string $lng): self
     {
+         // si on a pas de valeur de lng venant du front on setLng à null
+         if ($lng === ""){
+            $this->lng === null;
+            return $this;
+        }
+        // sinon
         $this->lng = $lng;
 
         return $this;

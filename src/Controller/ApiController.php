@@ -26,9 +26,12 @@ class ApiController extends AbstractController
     {   
        
         $data = $request->getContent();
-    
+        
         $picture = $serializer->deserialize($data, Picture::class, 'json');
-       
+        //dd($picture);
+        // ici sur $picture -> retour response HTTP_FORBIDDEN 
+        // si la vérification if de SetPicture() n'a pas abouti.
+
         $errors = $validator->validate($picture);
 
         if (count($errors) > 0) {
@@ -41,12 +44,13 @@ class ApiController extends AbstractController
         $doctrine->persist($picture);
         
         $doctrine->flush();
-     
+        
         return $this->json(
             $picture,
             Response::HTTP_CREATED,
             [],
         );
+        
     }
 
     /**
