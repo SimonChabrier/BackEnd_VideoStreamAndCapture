@@ -30,7 +30,7 @@ class PictureListener
      * @param Picture $picture
      * @return void
      */
-    public function updatePictureFile(Picture $picture)
+    public function processPictureFile(Picture $picture)
     {   
         // On traite l'image avec la méthode de jpegConverterService pour convertir le Base64 et stocker le fichier dans un rep local
         $pictureFile = $this->jpegConverterService->convertBase64ToJgeg($picture->getPicture());
