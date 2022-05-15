@@ -10,7 +10,7 @@ https://js.simschab.fr/cam/index.html
 - Automate deletion of all image files on EasyAdmin delete entry
 - Database management
 - CORS & global app security management
-- Admin Login
+- Admin Login & Panel
 
 ### BackEnd access :
 https://photoboothback.simschab.fr/
