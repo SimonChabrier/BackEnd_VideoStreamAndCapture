@@ -9,6 +9,9 @@ liip_imagine:
     webp:
         generate: true
         quality: 100    
+    # I set twig on lasz to fix deprecated message on future version
+    twig:
+        mode: lazy
 
     filter_sets:
         portrait: 
