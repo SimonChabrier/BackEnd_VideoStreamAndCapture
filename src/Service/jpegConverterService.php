@@ -8,9 +8,6 @@ namespace App\Service;
 class jpegConverterService
 {
     // Paramètre initialisé dans services.yaml
-    // contenant le repertoire local dans lequel
-    // on déplace le fichier .jpeg crée dans la logique de 
-    // la méthode convertBase64ToJgeg
     private $uploadPath;
 
     public function __construct(string $uploadPath)
@@ -19,32 +16,23 @@ class jpegConverterService
     }
 
     /**
-     * Convertisseur d'image Base64 vers jpeg
-     * traite le fichier base64 pour le convertir en jpg et le déplace 
-     * dans le repertoire défini dans la variable $uploadPath
-     * @param string $img
+     * 1 / Convertisseur d'image Base64 vers jpeg
+     * 2 / On stocke le fichier dans uploadPath
+     * 3 / On retourne le nom du fichier
+     * @param string
      * @return string
      */
-    public function convertBase64ToJgeg (string $img):string
+    public function convertBase64ToJgeg (string $base64):string
     {   
-
-        $img = str_replace('data:image/jpeg;base64,', '', $img); // 1er traitement du fichier base64
-        $img = str_replace(' ', '+', $img);  // 2eme traitement du fichier base64
-        $file = base64_decode($img); // on decode vers un format jpg. $data est maintenant le fichier jpg
-        $pictureFile = uniqid() . '.jpeg'; // on crée aléatoirement un nom unique xxxxxx.jpg
-        $destination =  $this->uploadPath . $pictureFile; // on lui donne la valeur à écrire dans le rep : assets/upload/pictures/xxxxxx.jpg en concaténant
-        file_put_contents($destination, $file); //on déplace dans le rep : $destination le fichier jpg : $data
-
-        return $pictureFile; //on retourne la valeur string de $pictureFile pour la persister en Bdd si on utilise le service
-    }
-
-    /**
-     * Récupère la valeur du paramètre 'picture_directory' déclaré dans services.yaml
-     * https://symfony.com/doc/current/controller/upload_file.html#creating-an-uploader-service
-     */
-    public function getTargetDirectory()
-    {
-        return $this->targetDirectory;
+        $firstTreatment = str_replace('data:image/jpeg;base64,', '', $base64); // 1er traitement de la string base64
+        $secondTreatement = str_replace(' ', '+', $firstTreatment);  // 2eme traitement de la string base64
+        $jpegFile = base64_decode($secondTreatement); // on encode en jpeg => return string correspondant au code jpeg (on a un fichier.jpeg)
+        
+        $namedJpegFile = uniqid() . '.jpeg'; // on crée un nom unique => return string xxxxxx.jpg
+        $absolutePath =  $this->uploadPath . $namedJpegFile; // on reconstruit le chemin vers rep : assets/upload/pictures/xxxxxx.jpg 
+        file_put_contents($absolutePath, $jpegFile); //on déplace dans le rep : $destination le fichier jpg : $jpgFile
+        
+        return $namedJpegFile; //on retourne la valeur string de $namedJpegFile pour la persister en Bdd si on utilise le service
     }
 
 }

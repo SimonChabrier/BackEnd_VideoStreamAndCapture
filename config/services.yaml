@@ -41,29 +41,11 @@ services:
         alias: 'liip_imagine.service.filter'
     
     
-    # Mon EventListener : PictureListener sur Doctrine
+    # EventListener : PictureListener sur Doctrine
     # J'y injecte mon service jpegConverterService
     # à chaque foi qu'on instancie un nouvel objet Picture.
     # On accède à la méthode convertBase64ToJgeg() de jpegConverterService
-    # dans la méthode updatePictureFile() de PictureListener
-    App\EventListener\PictureListener:
-        tags:
-            -
-                # le nom du type d'évènement, ici un évènement doctrine entity listener
-                name: doctrine.orm.entity_listener
-                # le nom de l'event : avant update (impératif sinon ça ne marche pas même pou les créations)
-                event: preUpdate
-                # l'entity sur laquelle on veut être notifié
-                entity: App\Entity\Picture
-                # methode de mon listener
-                method: updatePictureFile
-            -
-                name: doctrine.orm.entity_listener
-                event: prePersist
-                entity: App\Entity\Picture
-                method: updatePictureFile    
-
-    # Mon EventListener : liipListener sur Doctrine 
+    # dans la méthode processPictureFile() de PictureListener
     # J'y injecte le service : FilterService (Classe de Service du bundle Liip)
     # à chaque foi qu'on instancie un nouvel objet Picture.
     # On accède à ma méthode cachePictureFile() sur l'objet Picture courant.
@@ -72,15 +54,19 @@ services:
     # Le filtre traite et le met en cache le fichier image.
     # Faire tout le process directement dans le back-end
     # permet de servir au client (ou view) un fichier image directement dans sa version optimisée => Gain de performance et de clarté dans le code.
-    App\EventListener\liipListener:
+    App\EventListener\PictureListener:
         tags:
             -
+                # le nom du type d'évènement, ici un évènement doctrine entity listener
                 name: doctrine.orm.entity_listener
                 event: preUpdate
                 entity: App\Entity\Picture
-                method: cachePictureFile
+                method: processPictureFile
             -
                 name: doctrine.orm.entity_listener
                 event: prePersist
                 entity: App\Entity\Picture
-                method: cachePictureFile  
+                method: processPictureFile   
+
+    
+
