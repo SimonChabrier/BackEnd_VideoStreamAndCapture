@@ -14,10 +14,10 @@ class MainController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Route("/", name="app_main")
      */
-    public function index( ): Response
+    public function home(): Response
     {       
         // si il y a un user et qu'il est déjà identifié
-        if($this->getUser() && 'IS_AUTHENTICATED_FULLY'){
+        if($this->getUser() && 'IS_AUTHENTICATED_FULLY' && 'ROLE_ADMIN'){
             return $this->redirectToRoute('app_admin');
         };
         // sinon :

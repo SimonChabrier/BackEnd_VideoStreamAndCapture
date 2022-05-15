@@ -17,12 +17,17 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        // si il y a un user et qu'il est déjà identifié
+        if($this->getUser() && 'IS_AUTHENTICATED_FULLY' && 'ROLE_ADMIN'){
+            return $this->redirectToRoute('app_admin');
+        };
+
+        // sinon :
         return $this->render
         (
             'security/login.html.twig', 
             ['last_username' => $lastUsername, 'error' => $error]
         );
-        
     }
 
     /**
