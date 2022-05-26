@@ -17,12 +17,12 @@ class CreatePictureUsingService extends Command
 
     private $pictureRepository;
     private $jpegConverterService;
-    private $entityManagerInterface;
+    private $em;
 
-    public function __construct(PictureRepository $pictureRepository, jpegConverterService $jpegConverterService, EntityManagerInterface $entityManagerInterface)
+    public function __construct(PictureRepository $pictureRepository, jpegConverterService $jpegConverterService, EntityManagerInterface $em)
     {
         $this->pictureRepository = $pictureRepository; 
-        $this->entityManagerInterface = $entityManagerInterface;   
+        $this->em = $em;   
         $this->jpegConverterService = $jpegConverterService;
 
         parent::__construct();
@@ -38,22 +38,20 @@ class CreatePictureUsingService extends Command
 
         foreach ($imgages as $image) {
 
-            $pictureFile = $image->getPictureFile();
+        $pictureFile = $image->getPictureFile();
 
-            if ($pictureFile) {
+        if ($pictureFile) {
+            continue;    
+        } else {
 
-                continue;
-                
-            } else {
+        $image->setPictureFile($this->jpegConverterService->convertBase64ToJgeg($image->getPicture()));
 
-            $image->setPictureFile($this->jpegConverterService->convertPictureService($image->getPicture()));
+        $io->success('Résultat : ' . $image->getPictureFile());
 
-            $io->success('Résultat : ' . $image->getPictureFile());
-  
-            }
+        }
         }
 
-         $this->entityManagerInterface->flush();
+        $this->em->flush();
 
          //message de sortie
          $io->success(sprintf('Terminé'));
