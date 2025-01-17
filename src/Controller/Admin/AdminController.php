@@ -46,18 +46,16 @@ class AdminController extends AbstractDashboardController
      * @return iterable
      */
     public function configureMenuItems(): iterable
-    {   
+    {
         yield MenuItem::linkToLogout('Logout', 'fa fa-fw fa-sign-out');
         yield MenuItem::section('Home');
         yield MenuItem::linktoRoute('Accueil', 'fas fa-home', 'app_login');
         yield MenuItem::section('Site Public');
-        yield MenuItem::linkToUrl('Front', 'fas fa-map', 'https://js.simschab.fr/cam/index.html');
+        yield MenuItem::linkToUrl('Front', 'fas fa-map', 'https://js.simschab.cloud/cam/');
         yield MenuItem::section('Administrer');
         // je linke le crud de ma classe Picture et autorise les modifications sur cette classe uniquement pour le rôle admin.
         // les autres rôles ne verront pas les liens dans la sidebar
-        yield MenuItem::linkToCrud('Images', 'fas fa-solid fa-image', Picture::class)->setPermission('ROLE_ADMIN')
-        ;
-       
+        yield MenuItem::linkToCrud('Images', 'fas fa-solid fa-image', Picture::class)->setPermission('ROLE_ADMIN');
     }
     /**
      * Personalize Admin Css
@@ -66,9 +64,8 @@ class AdminController extends AbstractDashboardController
     public function configureAssets(): Assets
     {
         return Assets::new()
-        ->addCssFile('assets/css/admin.css')
-        ->addHtmlContentToHead('<link rel="shortcut icon" href="favicon.ico">')
+            ->addCssFile('assets/css/admin.css')
+            ->addHtmlContentToHead('<link rel="shortcut icon" href="favicon.ico">')
         ;
     }
-
 }

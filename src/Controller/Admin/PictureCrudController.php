@@ -14,7 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class PictureCrudController extends AbstractCrudController
-{   
+{
     /**
      * Set the entity we use 
      * @return string
@@ -37,7 +37,7 @@ class PictureCrudController extends AbstractCrudController
             // Si je n'ai pas fermé la visibilité dans la sidebar dans AdminController.php : configureMenuItems()
             // alors, ici je peux aussi décider de cacher le contenu de ce CRUD aux rôle non autorisés
             ->setEntityPermission('ROLE_ADMIN')
-            ->setPaginatorPageSize(10)
+            ->setPaginatorPageSize(30)
             ->setPaginatorRangeSize(4)
             // https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/tutorials/pagination.html
             // ->setPaginatorUseOutputWalkers(true)
@@ -53,8 +53,7 @@ class PictureCrudController extends AbstractCrudController
     {
         return $actions
 
-        ->disable(Action::NEW, Action::EDIT)
-        ;
+            ->disable(Action::NEW, Action::EDIT);
     }
 
     /**
@@ -66,13 +65,12 @@ class PictureCrudController extends AbstractCrudController
         return [
             IdField::new('id'),
             ImageField::new('pictureFile')
-            ->setBasePath('media/cache/portrait/assets/upload/pictures'),
+                ->setBasePath('media/cache/portrait/assets/upload/pictures'),
             TextField::new('pictureFile'),
             DateField::new('createdAt'),
             TextField::new('lat'),
             TextField::new('lng'),
         ];
-
     }
 
     /**
