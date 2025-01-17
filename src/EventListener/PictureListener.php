@@ -8,7 +8,7 @@ use App\Service\jpegConverterService;
 // Service de Liip => ses methodes
 use Liip\ImagineBundle\Service\FilterService;
 
-class PictureListener 
+class PictureListener
 {
 
     /**
@@ -17,10 +17,8 @@ class PictureListener
      */
     private $uploadPath;
 
-    public function __construct(jpegConverterService $jpegConverterService, FilterService $liipFilterService, string $uploadPath)
+    public function __construct(private jpegConverterService $jpegConverterService, private FilterService $liipFilterService, string $uploadPath)
     {
-        $this->jpegConverterService = $jpegConverterService;
-        $this->liipFilterService = $liipFilterService;
         $this->uploadPath = $uploadPath;
     }
 
@@ -31,14 +29,14 @@ class PictureListener
      * @return void
      */
     public function processPictureFile(Picture $picture)
-    {   
+    {
         // On traite l'image avec la méthode de jpegConverterService pour convertir le Base64 et stocker le fichier dans un rep local
         $pictureFile = $this->jpegConverterService->convertBase64ToJgeg($picture->getPicture());
         // On set le nom de $pictureFile avec la valeur du return de convertBase64ToJgeg()
         $picture->setPictureFile($pictureFile);
         // On traite la mise en cache
-        $this->liipFilterService->getUrlOfFilteredImage($this->uploadPath . $picture->getPictureFile(), 'portrait'); 
+        $this->liipFilterService->getUrlOfFilteredImage($this->uploadPath . $picture->getPictureFile(), 'portrait');
         // je reconstruit l'url + le nom du fichier à traiter et je lui passe mon filtre liip
-        
+
     }
 }
