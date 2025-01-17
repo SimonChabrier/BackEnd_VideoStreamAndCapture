@@ -16,11 +16,9 @@ class MainController extends AbstractController
      */
     public function home(): Response
     {       
-        // si il y a un user et qu'il est déjà identifié
         if($this->getUser() && 'IS_AUTHENTICATED_FULLY' && 'ROLE_ADMIN'){
             return $this->redirectToRoute('app_admin');
         };
-        // sinon :
         return $this->redirectToRoute('app_login');
     }
 }

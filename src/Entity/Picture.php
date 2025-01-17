@@ -79,7 +79,7 @@ class Picture
             $this->picture = $picture;
             return $this;
         }
-
+        
         // sinon on ferme tout
         // j'ai bien un code retour 403
         $response = new Response();
